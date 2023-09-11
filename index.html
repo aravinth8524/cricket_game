@@ -1,0 +1,113 @@
+<html>
+<head>
+<title>Cricket Game</title>
+</head>
+<body>
+
+<h2><span>player1</span>:<span id="player1">0</span></h2>
+<h2><span>player2</span>:<span id="player2">0</span></h2>
+<button id="play_btn">play</button>
+<button id="reset_btn">reset</button>
+<h2 id="result"></h2>
+
+
+<script>
+
+var playbtn = document.getElementById("play_btn"); 
+    resetbtn = document.getElementById("reset_btn");
+    player1Element = document.getElementById("player1");
+    player2Element = document.getElementById("player2");
+	result =document.getElementById("result")
+	player1score = 0;
+	player2score = 0;
+	batting = "player1";
+	
+	
+	<!-- random Score -->
+	function random()
+		{
+		var randomscore = Math.random();
+		randomscore*=10;
+		var randomscore =Math.floor(randomscore);
+		return randomscore;
+		}
+		
+
+	function play(){
+
+		let run =random();
+		console.log(run);
+		if(run>=7){
+			if(batting =="player1"){
+
+			batting="player2";
+			}
+			else{
+				gameover();
+			}
+			}
+		else{
+			if(batting=="player1")
+			{
+			player1score += run;
+			}
+			else{
+			player2score += run;
+			}
+				update();
+			}
+
+			
+
+
+			}
+
+function update(){
+   
+   player1Element.innerHTML =player1score;
+   player2Element.innerHTML =player2score;
+   
+   if(batting == "player2"){
+			if(player2score > player1score){
+				gameover();
+			}
+		}
+
+
+}
+
+function gameover(){
+if(player1score>player2score){
+  result.innerHTML = "player1 Win";
+}
+else if(player1score<player2score){
+
+result.innerHTML = "player2 Win";
+}
+else{
+		result.innerHTML = "match Tie";
+}
+
+}
+
+function reset(){
+player1score =0;
+player2score =0;
+result.innerHTML = " ";
+batting ="player1";
+update();
+}
+
+
+playbtn.addEventListener("click",play);
+resetbtn.addEventListener("click",reset);
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
